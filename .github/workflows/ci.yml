@@ -1,20 +1,20 @@
 name: CI
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
   pull_request:
-    branches: [ "main" ]
+    branches: ['main']
 
 jobs:
   render:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install requirements
         uses: daaku/gh-action-apt-install@v4
         with:
-          packages: lua5.3 pandoc
+          packages: lua5.3 pandoc libreoffice
 
       - name: Render files
         run: ./render.sh
@@ -24,4 +24,3 @@ jobs:
         with:
           name: datasheets
           path: output/
-     
