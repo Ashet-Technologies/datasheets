@@ -12,9 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install requirements
-        uses: daaku/gh-action-apt-install@v4
-        with:
-          packages: lua5.3 pandoc libreoffice
+        run: apt-get install -y lua5.3 pandoc libreoffice
 
       - name: Render files
         run: ./render.sh
