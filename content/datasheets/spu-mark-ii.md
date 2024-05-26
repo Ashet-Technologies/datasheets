@@ -1,9 +1,10 @@
 {
-type=APPNOTE,
-title = "The SPU Mark II Architecture",
-part = "ACT-SPU-II",
-date = Date(2023,04,19),
-revision = Version(1,11),
+	type=DATASHEET,
+	status=PUBLISHED,
+	title = "The SPU Mark II Architecture",
+	part = "ACT-SPU-II",
+	date = Date(2024,05,26),
+	revision = Version(1,12),
 }
 
 # The SPU Mark II Architecture
@@ -482,7 +483,7 @@ This interrupt is the maskable external interrupt. If the `IRQ` pin is signalled
 
 Before execution of each instruction the cpu checks if any interrupt is triggered. The handler for the lowest interrupt triggered will then be activated.
 
-## Chip I/Os
+## External Interface
 
 - 16 output address lanes
 - 16 in/out data lanes
@@ -496,6 +497,10 @@ Before execution of each instruction the cpu checks if any interrupt is triggere
 - output TYPE signal (tells if memory access is for code or data)
 
 ## Changelog
+
+### v1.12
+
+- Renames "Chip I/Os" section to "External Interface"
 
 ### v1.11
 

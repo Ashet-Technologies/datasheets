@@ -1,7 +1,8 @@
 {
     type=DATASHEET,
-    title = "Ethernet",
-    part = "???",
+	status = DRAFT,
+    title = "EtherLink",
+    part = "ACT-ETH-I",
     date = Date(2023,04,19),
     revision = Version(0,1),
 }

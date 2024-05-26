@@ -1,12 +1,13 @@
 {
     type=DATASHEET,
-    title = "Timer",
-    part = "???",
+	status = PUBLISHED,
+    title = "MicroTick 16",
+    part = "ACT-TIM-I",
     date = Date(2023,04,19),
-    revision = Version(0,1),
+    revision = Version(1,0),
 }
 
-# Timer
+# MicroTick 16
 
 Each timer runs at a defined frequency that is not necessarily the cpu frequency.
 

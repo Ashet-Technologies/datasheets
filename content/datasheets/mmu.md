@@ -1,18 +1,21 @@
 {
     type=DATASHEET,
-    title = "SimpleMMU",
-    part = "???",
+	status = PUBLISHED,
+    title = "ExpandPro 24",
+    part = "ACT-MMU-I",
     date = Date(2023,04,19),
-    revision = Version(1,0),
+    revision = Version(1,0,0),
 }
 
-# SimpleMMU
+# ExpandPro 24
 
 ## Overview
 
 - 16 bit virtual addresses
 - 24 bit physical addresses
 - 16 banks a 4096 byte -> 64 kB address space
+- Configurable write-protection per page
+- Support for access and write faults
 
 ## Function
 

@@ -61,7 +61,17 @@ local function loadDocument(path)
 
   local lua_header, markdown_source = raw_md:match("(%b{})(.*)")
 
-  local header_env = { APPNOTE = "appnote", DATASHEET = "datasheet", MANUAL = "manual" }
+  local header_env = { 
+    -- values for "type"
+    APPNOTE = "appnote",
+    DATASHEET = "datasheet",
+    MANUAL = "manual",
+    SPECIFICATION = "specification",
+
+    -- values for "status"
+    DRAFT = "draft",
+    PUBLISHED = "published",
+  }
 
   function header_env.Date(y, m, d)
     return { day = assert(tonumber(d)), month = assert(tonumber(m)), year = assert(tonumber(y)) }
@@ -75,8 +85,9 @@ local function loadDocument(path)
 
   local header = header_gen()
 
-  return {
+  doc = {
     type = assert(tostring(header.type)),
+    status = assert(tostring(header.status)),
     title = assert(tostring(header.title)),
     part = assert(tostring(header.part)),
     date = assert(header.date),
@@ -84,6 +95,21 @@ local function loadDocument(path)
 
     source = assert(tostring(markdown_source)),
   }
+
+  assert(
+       doc.type == header_env.APPNOTE 
+    or doc.type == header_env.DATASHEET 
+    or doc.type == header_env.MANUAL 
+  )
+
+  assert(
+       doc.status == header_env.DRAFT
+    or doc.status == header_env.PUBLISHED
+  )
+
+  assert(doc.status ~= header_env.PUBLISHED or doc.revision.major > 0)
+
+  return doc
 end
 
 local function renderToXml(source_code)
@@ -101,13 +127,17 @@ local function renderToXml(source_code)
   return body
 end
 
-local function convertFile(source_file, target_file)
+local function convertFile(source_file, mode)
+
+  assert(mode == "release" or mode == "draft")
 
   local base_name = assert(source_file:match("([%w\\-]+)%.%w+$"))
 
-  io.stderr:write("Process ", base_name, "...\n")
-
   local doc = loadDocument(source_file)
+
+  if mode == "release" and doc.status ~= "published" then 
+    return nil
+  end
 
   local body = renderToXml(doc.source)
 
@@ -124,20 +154,30 @@ local function convertFile(source_file, target_file)
 
   capture("libreoffice --headless --convert-to pdf --outdir temp/ temp/" .. base_name .. ".fodt")
 
-  os.execute("mv \"temp/" .. base_name .. ".pdf\" \"" .. target_file .. "\"")
+  output_file = "temp/" .. base_name .. ".pdf"
 
   os.remove("temp/" .. base_name .. ".fodt")
   os.remove("temp/document.md")
+
+  return {
+    folder = doc.type .. "s",
+    file = output_file,
+  }
 end
 
-if #arg < 2 then
-  io.stderr:write("render.lua <source-md> <target-pdf>\n")
+if #arg < 1 then
+  io.stderr:write("render.lua <source-md> [release|draft]\n")
   os.exit(1)
 end
 
 renderMode = "release"
-if #arg == 3 then 
+if #arg == 2 then 
   renderMode = arg[3]
 end
 
-convertFile(arg[1], arg[2], renderMode)
+output = convertFile(arg[1], renderMode)
+if output then
+  io.stdout:write(
+    output.folder .. ":" .. output.file .. "\n"
+  )
+end

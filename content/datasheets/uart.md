@@ -1,12 +1,13 @@
 {
     type=DATASHEET,
-    title = "TinyUART",
-    part = "???",
+	status = DRAFT,
+    title = "SerialPro 550",
+    part = "ACT-SER-I",
     date = Date(2023,04,19),
     revision = Version(0,1),
 }
 
-# TinyUART
+# SerialPro 550
 
 A 16C550 compatible UART component.
 
@@ -15,7 +16,7 @@ A 16C550 compatible UART component.
 
 ## Features
 
-The TinyUART is a 16C550 compatible UART implementation that provides a fully featured UART interface including flow- and modem control.
+The SerialPro 550 is a 16C550 compatible UART implementation that provides a fully featured UART interface including flow- and modem control.
 
 ## Registers
 

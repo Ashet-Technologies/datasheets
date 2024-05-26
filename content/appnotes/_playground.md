@@ -1,9 +1,10 @@
 {
-type=APPNOTE,
-title = "DEMO",
-part = "DEMO",
-date = Date(2023,04,19),
-revision = Version(0,0),
+    type=APPNOTE,
+    status=DRAFT,
+    title = "DEMO",
+    part = "DEMO",
+    date = Date(2023,04,19),
+    revision = Version(0,0),
 }
 
 # First Level

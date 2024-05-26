@@ -1,7 +1,8 @@
 {
 	type=DATASHEET,
-	title = "BasicVGA",
-	part = "???",
+	status = DRAFT,
+	title = "PixelMaster 8",
+	part = "ACT-VID-I",
 	date = Date(2023,04,19),
 	revision = Version(0,1),
 }
