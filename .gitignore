@@ -3,3 +3,4 @@ result/
 output/
 temp/
 *.bak
+.~lock.*.fodt#

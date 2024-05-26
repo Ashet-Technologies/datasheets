@@ -498,6 +498,18 @@
     </style:style>
   </office:styles>
   <office:automatic-styles>
+    <style:style style:name="HeaderTable.Base" style:family="table">
+     <style:table-properties style:width="17cm" table:align="margins"/>
+    </style:style>
+    <style:style style:name="HeaderTable.Base.A" style:family="table-column">
+      <style:table-column-properties style:column-width="3.5cm" style:rel-column-width="1988*"/>
+     </style:style>
+     <style:style style:name="HeaderTable.Base.B" style:family="table-column">
+      <style:table-column-properties style:column-width="10.0cm" style:rel-column-width="5662*"/>
+     </style:style>
+     <style:style style:name="HeaderTable.Base.B.P" style:family="paragraph" style:parent-style-name="Standard">
+      <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+     </style:style>
     $automatic-styles$
   </office:automatic-styles>
   <office:master-styles>
@@ -506,16 +518,15 @@
         <table:table table:name="HeaderTable.Base" table:style-name="HeaderTable.Base">
           <table:table-column table:style-name="HeaderTable.Base.A" />
           <table:table-column table:style-name="HeaderTable.Base.B" />
-          <table:table-column table:style-name="HeaderTable.Base.C" />
+          <table:table-column table:style-name="HeaderTable.Base.A" />
           <table:table-row table:style-name="HeaderTable.Base.1">
-            <table:table-cell table:style-name="HeaderTable.Base.A1" table:number-rows-spanned="2"
+            <table:table-cell table:number-rows-spanned="2"
               office:value-type="string">
               <text:p text:style-name="Header_20_left">[DOCUMENT DATE]</text:p>
             </table:table-cell>
-            <table:table-cell table:style-name="HeaderTable.Base.A1" office:value-type="string">
-              <text:p text:style-name="P1">
-                <draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="as-char"
-                  svg:width="7.317cm" svg:height="0.725cm" draw:z-index="3">
+            <table:table-cell office:value-type="string">
+              <text:p text:style-name="HeaderTable.Base.B.P"><draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="as-char"
+                  svg:width="7.32cm" svg:height="0.6cm" draw:z-index="3">
                   <draw:image draw:mime-type="image/png">
                     <office:binary-data>iVBORw0KGgoAAAANSUhEUgAAAjcAAAAqCAYAAABP/3rCAAABhWlDQ1BJQ0MgcHJvZmlsZQAA
                       KJF9kT1Iw0AYht+mlYpUHNpBpEOG6mQXFdGtVqEIFUKt0KqDyaV/0KQlSXFxFFwLDv4sVh1c
@@ -565,21 +576,19 @@
                       ABAB/wHuSQ8zu8sBfwAAAABJRU5ErkJggg==
                     </office:binary-data>
                   </draw:image>
-                </draw:frame>
-                <text:s text:c="7" />
-              </text:p>
+                </draw:frame></text:p>
             </table:table-cell>
-            <table:table-cell table:style-name="HeaderTable.Base.A1" table:number-rows-spanned="2"
+            <table:table-cell table:number-rows-spanned="2"
               office:value-type="string">
               <text:p text:style-name="Header_20_right">[DOCUMENT PART]</text:p>
             </table:table-cell>
           </table:table-row>
           <table:table-row table:style-name="HeaderTable.Base.1">
-            <table:covered-table-cell table:style-name="HeaderTable.Base.A1" />
-            <table:table-cell table:style-name="HeaderTable.Base.A1" office:value-type="string">
-              <text:p text:style-name="Header_20_Center">[DOCUMENT TITLE]</text:p>
+            <table:covered-table-cell />
+            <table:table-cell office:value-type="string">
+              <text:p text:style-name="HeaderTable.Base.B.P">[DOCUMENT TITLE]</text:p>
             </table:table-cell>
-            <table:covered-table-cell table:style-name="HeaderTable.Base.A1" />
+            <table:covered-table-cell />
           </table:table-row>
         </table:table>
         <text:p text:style-name="Standard">
