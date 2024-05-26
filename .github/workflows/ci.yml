@@ -14,7 +14,7 @@ jobs:
       - name: Install requirements
         uses: daaku/gh-action-apt-install@v4
         with:
-          packages: lua pandoc
+          packages: lua5.3 pandoc
 
       - name: Render files
         run: ./render.sh
