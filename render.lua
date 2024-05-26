@@ -172,7 +172,7 @@ end
 
 renderMode = "release"
 if #arg == 2 then 
-  renderMode = arg[3]
+  renderMode = arg[2]
 end
 
 output = convertFile(arg[1], renderMode)

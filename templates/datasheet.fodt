@@ -117,7 +117,7 @@
         fo:font-style="normal" fo:font-weight="normal" />
     </style:style>
     <style:style style:name="Heading" style:family="paragraph" style:parent-style-name="Standard"
-      style:next-style-name="Text_20_body" style:class="text">
+       style:class="text">
       <style:paragraph-properties fo:margin-top="0.423cm" fo:margin-bottom="0.212cm"
         style:contextual-spacing="false" fo:keep-with-next="always" />
       <style:text-properties style:font-name="Liberation Sans"
@@ -129,11 +129,36 @@
         style:font-family-generic-complex="system" style:font-pitch-complex="variable"
         style:font-size-complex="14pt" />
     </style:style>
-    <style:style style:name="Text_20_body" style:display-name="Text body" style:family="paragraph"
+
+  <!-- Text Body -->
+
+    <!-- <style:style style:name="Text_20_body" style:display-name="Text body" style:family="paragraph"
       style:parent-style-name="Standard" style:class="text">
-      <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
-        style:contextual-spacing="false" fo:line-height="115%" />
+      <style:paragraph-properties 
+        fo:margin-top="0.25cm" 
+        fo:margin-bottom="0.25cm"
+        style:contextual-spacing="false"
+        fo:line-height="115%" 
+        fo:text-align="justify"
+        />
+    </style:style> -->
+    <style:style style:name="Text_20_body" style:display-name="Text body" style:family="paragraph" style:parent-style-name="Standard" style:class="text">
+     <style:paragraph-properties
+     fo:margin-top="0.10cm"
+     fo:margin-bottom="0.10cm"
+     style:contextual-spacing="false"
+     fo:text-align="justify"
+     style:justify-single-word="false"
+     />
     </style:style>
+
+    <style:style style:name="First_20_paragraph" style:display-name="Text body" style:family="paragraph"
+      style:parent-style-name="Text_20_body" style:class="text">
+      <style:paragraph-properties />
+    </style:style>
+
+    <!-- ??? -->
+
     <style:style style:name="List" style:family="paragraph" style:parent-style-name="Text_20_body"
       style:class="list">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
@@ -154,6 +179,8 @@
       <style:text-properties style:font-size-asian="12pt" style:font-name-complex="FreeSans"
         style:font-family-complex="FreeSans" style:font-family-generic-complex="swiss" />
     </style:style>
+
+    <!-- MASTER PAGE-->
 
     <style:style style:name="Header_20_and_20_Footer" style:display-name="Header and Footer"
       style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
@@ -203,15 +230,23 @@
       <style:paragraph-properties fo:text-align="end"  />
     </style:style>
 
+  <!-- TABLES -->
 
     <style:style style:name="Table_20_Contents" style:display-name="Table Contents"
       style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
-      <style:paragraph-properties fo:orphans="0" fo:widows="0" text:number-lines="false"
-        text:line-number="0" />
     </style:style>
 
+    <style:style style:name="Table_20_Heading" style:display-name="Table Header"
+      style:family="paragraph" style:parent-style-name="Table_20_Contents" style:class="extra">
+      <style:text-properties 
+        style:font-style-name="Semibold"  fo:font-weight="600" 
+        />
+    </style:style>
+
+    <!-- ??? -->
+
     <style:style style:name="Title" style:family="paragraph" style:parent-style-name="Heading"
-      style:next-style-name="Text_20_body" style:class="chapter" style:master-page-name="">
+       style:class="chapter" style:master-page-name="">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
         style:contextual-spacing="false" fo:line-height="100%" fo:text-align="start"
         style:justify-single-word="false" style:page-number="auto" />
@@ -223,7 +258,7 @@
         style:font-weight-complex="600" />
     </style:style>
     <style:style style:name="Heading_20_1" style:display-name="Heading 1" style:family="paragraph"
-      style:parent-style-name="Heading" style:next-style-name="Text_20_body"
+      style:parent-style-name="Heading" 
       style:default-outline-level="1" style:class="text">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
         style:contextual-spacing="false" />
@@ -232,7 +267,7 @@
         style:font-weight-complex="600" />
     </style:style>
     <style:style style:name="Heading_20_2" style:display-name="Heading 2" style:family="paragraph"
-      style:parent-style-name="Heading" style:next-style-name="Text_20_body"
+      style:parent-style-name="Heading" 
       style:default-outline-level="2" style:class="text">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
         style:contextual-spacing="false" />
@@ -241,7 +276,7 @@
         style:font-weight-complex="600" />
     </style:style>
     <style:style style:name="Heading_20_3" style:display-name="Heading 3" style:family="paragraph"
-      style:parent-style-name="Heading" style:next-style-name="Text_20_body"
+      style:parent-style-name="Heading" 
       style:default-outline-level="3" style:class="text">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
         style:contextual-spacing="false" />
@@ -250,7 +285,7 @@
         style:font-weight-complex="bold" />
     </style:style>
     <style:style style:name="Heading_20_4" style:display-name="Heading 4" style:family="paragraph"
-      style:parent-style-name="Heading" style:next-style-name="Text_20_body"
+      style:parent-style-name="Heading" 
       style:default-outline-level="4" style:class="text">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
         style:contextual-spacing="false" />
@@ -260,7 +295,7 @@
         style:font-weight-complex="bold" />
     </style:style>
     <style:style style:name="Heading_20_5" style:display-name="Heading 5" style:family="paragraph"
-      style:parent-style-name="Heading" style:next-style-name="Text_20_body"
+      style:parent-style-name="Heading" 
       style:default-outline-level="5" style:class="text">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
         style:contextual-spacing="false" />
@@ -271,7 +306,7 @@
 
     <style:style style:name="Heading_20_6" style:display-name="Heading 6" style:family="paragraph"
       loext:hidden="true" style:hidden="true" style:parent-style-name="Heading"
-      style:next-style-name="Text_20_body" style:default-outline-level="6" style:class="text">
+       style:default-outline-level="6" style:class="text">
       <style:paragraph-properties fo:margin-top="0.106cm" fo:margin-bottom="0.106cm"
         style:contextual-spacing="false" />
       <style:text-properties fo:font-size="12pt" fo:font-style="italic" fo:font-weight="bold"
@@ -329,7 +364,7 @@
     </style:style>
     <style:style style:name="Heading_20_10" style:display-name="Heading 10" style:family="paragraph"
       loext:hidden="true" style:hidden="true" style:parent-style-name="Heading"
-      style:next-style-name="Text_20_body" style:default-outline-level="10" style:class="text">
+       style:default-outline-level="10" style:class="text">
       <style:paragraph-properties fo:margin-top="0.106cm" fo:margin-bottom="0.106cm"
         style:contextual-spacing="false" />
       <style:text-properties fo:font-size="9pt" fo:font-weight="bold" style:font-size-asian="9pt"
@@ -338,7 +373,7 @@
     </style:style>
     <style:style style:name="Heading_20_9" style:display-name="Heading 9" style:family="paragraph"
       loext:hidden="true" style:hidden="true" style:parent-style-name="Heading"
-      style:next-style-name="Text_20_body" style:default-outline-level="9" style:class="text">
+       style:default-outline-level="9" style:class="text">
       <style:paragraph-properties fo:margin-top="0.106cm" fo:margin-bottom="0.106cm"
         style:contextual-spacing="false" />
       <style:text-properties fo:font-size="9pt" fo:font-weight="bold" style:font-size-asian="9pt"
@@ -347,7 +382,7 @@
     </style:style>
     <style:style style:name="Heading_20_8" style:display-name="Heading 8" style:family="paragraph"
       loext:hidden="true" style:hidden="true" style:parent-style-name="Heading"
-      style:next-style-name="Text_20_body" style:default-outline-level="8" style:class="text">
+       style:default-outline-level="8" style:class="text">
       <style:paragraph-properties fo:margin-top="0.106cm" fo:margin-bottom="0.106cm"
         style:contextual-spacing="false" />
       <style:text-properties fo:font-size="10pt" fo:font-style="italic" fo:font-weight="bold"
@@ -357,7 +392,7 @@
     </style:style>
     <style:style style:name="Heading_20_7" style:display-name="Heading 7" style:family="paragraph"
       loext:hidden="true" style:hidden="true" style:parent-style-name="Heading"
-      style:next-style-name="Text_20_body" style:default-outline-level="7" style:class="text">
+       style:default-outline-level="7" style:class="text">
       <style:paragraph-properties fo:margin-top="0.106cm" fo:margin-bottom="0.106cm"
         style:contextual-spacing="false" />
       <style:text-properties fo:font-size="10pt" fo:font-weight="bold" style:font-size-asian="10pt"
@@ -365,7 +400,7 @@
         style:font-weight-complex="bold" />
     </style:style>
     <style:style style:name="Appendix" style:family="paragraph" loext:hidden="true"
-      style:hidden="true" style:parent-style-name="Heading" style:next-style-name="Text_20_body"
+      style:hidden="true" style:parent-style-name="Heading" 
       style:class="chapter">
       <style:paragraph-properties fo:text-align="left" style:justify-single-word="false" />
       <style:text-properties fo:font-size="16pt" fo:font-weight="bold" style:font-size-asian="16pt"
@@ -373,7 +408,7 @@
         style:font-weight-complex="bold" />
     </style:style>
     <style:style style:name="Subtitle" style:family="paragraph" loext:hidden="true"
-      style:hidden="true" style:parent-style-name="Heading" style:next-style-name="Text_20_body"
+      style:hidden="true" style:parent-style-name="Heading" 
       style:class="chapter">
       <style:paragraph-properties fo:margin-top="0.106cm" fo:margin-bottom="0.212cm"
         style:contextual-spacing="false" fo:text-align="left" style:justify-single-word="false" />
@@ -495,6 +530,21 @@
      <style:style style:name="MasterPage.Table.Cell" style:family="table-cell">
       <style:table-cell-properties style:vertical-align="middle"/>
      </style:style>
+
+     <style:style style:name="TableRowCell" style:family="table-cell">
+      <style:table-cell-properties 
+        fo:padding="0.05cm"
+        fo:border="0.05pt solid #000000"
+      />
+    </style:style>
+    <style:style style:name="TableHeaderRowCell"  style:family="table-cell">
+      <style:table-cell-properties
+        fo:padding="0.05cm"
+        fo:border="0.05pt solid #000000"
+        fo:background-color="#cccccc"
+       />
+    </style:style>
+
     $automatic-styles$
   </office:automatic-styles>
   <office:master-styles>
