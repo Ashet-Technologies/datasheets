@@ -154,6 +154,7 @@
       <style:text-properties style:font-size-asian="12pt" style:font-name-complex="FreeSans"
         style:font-family-complex="FreeSans" style:font-family-generic-complex="swiss" />
     </style:style>
+
     <style:style style:name="Header_20_and_20_Footer" style:display-name="Header and Footer"
       style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
       <style:paragraph-properties text:number-lines="false" text:line-number="0">
@@ -164,32 +165,51 @@
       </style:paragraph-properties>
       <style:text-properties fo:font-size="8pt" />
     </style:style>
-    <style:style style:name="Header" style:family="paragraph"
+
+    <style:style style:name="MasterPage.Header" style:family="paragraph"
       style:parent-style-name="Header_20_and_20_Footer" style:class="extra">
-      <style:paragraph-properties text:number-lines="false" text:line-number="0">
-        <style:tab-stops>
-          <style:tab-stop style:position="8.795cm" style:type="center" />
-          <style:tab-stop style:position="17.59cm" style:type="right" />
-        </style:tab-stops>
-      </style:paragraph-properties>
-      <style:text-properties style:font-name="Inter SemiBold"
-        fo:font-family="&apos;Inter SemiBold&apos;" style:font-style-name="Semibold"
+      <style:text-properties style:font-name="Liberation Mono"
+        fo:font-family="&apos;Liberation Mono&apos;" style:font-style-name="Semibold"
         style:font-pitch="variable" fo:font-weight="600" />
     </style:style>
+
+    <style:style style:name="MasterPage.Header.Left" style:display-name="Header left"
+      style:family="paragraph" style:parent-style-name="MasterPage.Header" style:class="extra">
+      <style:paragraph-properties fo:text-align="start" />
+    </style:style>
+    <style:style style:name="MasterPage.Header.Center" style:family="paragraph" style:parent-style-name="Standard">
+     <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+    </style:style>
+    <style:style style:name="MasterPage.Header.Right" style:display-name="Header right"
+      style:family="paragraph" style:parent-style-name="MasterPage.Header" style:class="extra">
+      <style:paragraph-properties fo:text-align="end" />
+    </style:style>
+
+    <style:style style:name="MasterPage.Footer" style:family="paragraph"
+      style:parent-style-name="Header_20_and_20_Footer" style:class="extra">
+      <style:text-properties style:font-name="Liberation Mono"
+        fo:font-family="&apos;Liberation Mono&apos;" style:font-style-name="Regular"
+        style:font-pitch="variable" fo:font-weight="400" />
+    </style:style>
+    <style:style style:name="MasterPage.Footer.Left" style:display-name="Footer left"
+      style:family="paragraph" style:parent-style-name="MasterPage.Footer" style:class="extra">
+      <style:paragraph-properties fo:text-align="start" />
+    </style:style>
+    <style:style style:name="MasterPage.Footer.Center" style:family="paragraph" style:parent-style-name="Standard">
+     <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+    </style:style>
+    <style:style style:name="MasterPage.Footer.Right" style:display-name="Footer right"
+      style:family="paragraph" style:parent-style-name="MasterPage.Footer" style:class="extra">
+      <style:paragraph-properties fo:text-align="end"  />
+    </style:style>
+
+
     <style:style style:name="Table_20_Contents" style:display-name="Table Contents"
       style:family="paragraph" style:parent-style-name="Standard" style:class="extra">
       <style:paragraph-properties fo:orphans="0" fo:widows="0" text:number-lines="false"
         text:line-number="0" />
     </style:style>
-    <style:style style:name="Footer" style:family="paragraph"
-      style:parent-style-name="Header_20_and_20_Footer" style:class="extra">
-      <style:paragraph-properties text:number-lines="false" text:line-number="0">
-        <style:tab-stops>
-          <style:tab-stop style:position="8.795cm" style:type="center" />
-          <style:tab-stop style:position="17.59cm" style:type="right" />
-        </style:tab-stops>
-      </style:paragraph-properties>
-    </style:style>
+
     <style:style style:name="Title" style:family="paragraph" style:parent-style-name="Heading"
       style:next-style-name="Text_20_body" style:class="chapter" style:master-page-name="">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0.101cm"
@@ -248,44 +268,7 @@
         style:font-weight-asian="bold" style:font-size-complex="12pt"
         style:font-weight-complex="bold" />
     </style:style>
-    <style:style style:name="Header_20_left" style:display-name="Header left"
-      style:family="paragraph" style:parent-style-name="Header" style:class="extra">
-      <style:paragraph-properties text:number-lines="false" text:line-number="0">
-        <style:tab-stops>
-          <style:tab-stop style:position="8.795cm" style:type="center" />
-          <style:tab-stop style:position="17.59cm" style:type="right" />
-        </style:tab-stops>
-      </style:paragraph-properties>
-    </style:style>
-    <style:style style:name="Header_20_right" style:display-name="Header right"
-      style:family="paragraph" style:parent-style-name="Header" style:class="extra">
-      <style:paragraph-properties fo:text-align="end" style:justify-single-word="false"
-        text:number-lines="false" text:line-number="0">
-        <style:tab-stops>
-          <style:tab-stop style:position="8.795cm" style:type="center" />
-          <style:tab-stop style:position="17.59cm" style:type="right" />
-        </style:tab-stops>
-      </style:paragraph-properties>
-    </style:style>
-    <style:style style:name="Footer_20_left" style:display-name="Footer left"
-      style:family="paragraph" style:parent-style-name="Footer" style:class="extra">
-      <style:paragraph-properties text:number-lines="false" text:line-number="0">
-        <style:tab-stops>
-          <style:tab-stop style:position="8.795cm" style:type="center" />
-          <style:tab-stop style:position="17.59cm" style:type="right" />
-        </style:tab-stops>
-      </style:paragraph-properties>
-    </style:style>
-    <style:style style:name="Footer_20_right" style:display-name="Footer right"
-      style:family="paragraph" style:parent-style-name="Footer" style:class="extra">
-      <style:paragraph-properties fo:text-align="end" style:justify-single-word="false"
-        text:number-lines="false" text:line-number="0">
-        <style:tab-stops>
-          <style:tab-stop style:position="8.795cm" style:type="center" />
-          <style:tab-stop style:position="17.59cm" style:type="right" />
-        </style:tab-stops>
-      </style:paragraph-properties>
-    </style:style>
+
     <style:style style:name="Heading_20_6" style:display-name="Heading 6" style:family="paragraph"
       loext:hidden="true" style:hidden="true" style:parent-style-name="Heading"
       style:next-style-name="Text_20_body" style:default-outline-level="6" style:class="text">
@@ -296,6 +279,7 @@
         style:font-size-complex="12pt" style:font-style-complex="italic"
         style:font-weight-complex="bold" />
     </style:style>
+
     <style:style style:name="List_20_1" style:display-name="List 1" style:family="paragraph"
       style:parent-style-name="List" style:class="list" style:master-page-name="">
       <style:paragraph-properties fo:margin-left="0cm" fo:margin-right="0cm" fo:margin-top="0cm"
@@ -313,6 +297,7 @@
         </style:tab-stops>
       </style:paragraph-properties>
     </style:style>
+
     <style:style style:name="Preformatted_20_Text" style:display-name="Preformatted Text"
       style:family="paragraph" style:parent-style-name="Standard" style:class="html">
       <style:paragraph-properties fo:margin-top="0cm" fo:margin-bottom="0cm"
@@ -405,7 +390,7 @@
         style:font-weight-complex="bold" />
     </style:style>
     <style:style style:name="Header_20_Center" style:display-name="Header Center"
-      style:family="paragraph" style:parent-style-name="Header">
+      style:family="paragraph" style:parent-style-name="MasterPage.Header">
       <style:paragraph-properties fo:text-align="left" style:justify-single-word="false" />
       <style:text-properties style:font-name="Inter" fo:font-family="Inter"
         style:font-style-name="Bold" style:font-pitch="variable" fo:font-size="10pt"
@@ -498,120 +483,116 @@
     </style:style>
   </office:styles>
   <office:automatic-styles>
-    <style:style style:name="HeaderTable.Base" style:family="table">
+    <style:style style:name="MasterPage.Table.Base" style:family="table">
      <style:table-properties style:width="17cm" table:align="margins"/>
     </style:style>
-    <style:style style:name="HeaderTable.Base.A" style:family="table-column">
+    <style:style style:name="MasterPage.Table.Column.Outer" style:family="table-column">
       <style:table-column-properties style:column-width="3.5cm" style:rel-column-width="1988*"/>
      </style:style>
-     <style:style style:name="HeaderTable.Base.B" style:family="table-column">
+     <style:style style:name="MasterPage.Table.Column.Center" style:family="table-column">
       <style:table-column-properties style:column-width="10.0cm" style:rel-column-width="5662*"/>
      </style:style>
-     <style:style style:name="HeaderTable.Base.B.P" style:family="paragraph" style:parent-style-name="Standard">
-      <style:paragraph-properties fo:text-align="center" style:justify-single-word="false"/>
+     <style:style style:name="MasterPage.Table.Cell" style:family="table-cell">
+      <style:table-cell-properties style:vertical-align="middle"/>
      </style:style>
     $automatic-styles$
   </office:automatic-styles>
   <office:master-styles>
     <style:master-page style:name="Standard" style:page-layout-name="pm1" draw:style-name="dp1">
       <style:header>
-        <table:table table:name="HeaderTable.Base" table:style-name="HeaderTable.Base">
-          <table:table-column table:style-name="HeaderTable.Base.A" />
-          <table:table-column table:style-name="HeaderTable.Base.B" />
-          <table:table-column table:style-name="HeaderTable.Base.A" />
-          <table:table-row table:style-name="HeaderTable.Base.1">
-            <table:table-cell table:number-rows-spanned="2"
-              office:value-type="string">
-              <text:p text:style-name="Header_20_left">[DOCUMENT DATE]</text:p>
+        <table:table table:name="MasterPage.Table.Base" table:style-name="MasterPage.Table.Base">
+          <table:table-column table:style-name="MasterPage.Table.Column.Outer" />
+          <table:table-column table:style-name="MasterPage.Table.Column.Center" />
+          <table:table-column table:style-name="MasterPage.Table.Column.Outer" />
+          <table:table-row table:style-name="MasterPage.Table.Base.1">
+            <table:table-cell table:style-name="MasterPage.Table.Cell" office:value-type="string">
+              <text:p text:style-name="MasterPage.Header.Left">[DOCUMENT DATE]</text:p>
             </table:table-cell>
             <table:table-cell office:value-type="string">
-              <text:p text:style-name="HeaderTable.Base.B.P"><draw:frame draw:style-name="fr1" draw:name="Image1" text:anchor-type="as-char"
-                  svg:width="7.32cm" svg:height="0.6cm" draw:z-index="3">
-                  <draw:image draw:mime-type="image/png">
-                    <office:binary-data>iVBORw0KGgoAAAANSUhEUgAAAjcAAAAqCAYAAABP/3rCAAABhWlDQ1BJQ0MgcHJvZmlsZQAA
-                      KJF9kT1Iw0AYht+mlYpUHNpBpEOG6mQXFdGtVqEIFUKt0KqDyaV/0KQlSXFxFFwLDv4sVh1c
-                      nHV1cBUEwR8QVxcnRRcp8buk0CLGO457eO97X+6+A4RWlWlmIAFoumVkUkkxl18Vg68IIEwz
-                      ilmZmfU5SUrDc3zdw8f3uzjP8q77cwyqBZMBPpE4weqGRbxBPL1p1TnvE0dYWVaJz4nHDbog
-                      8SPXFZffOJccFnhmxMhm5okjxGKph5UeZmVDI54ijqmaTvlCzmWV8xZnrdpgnXvyF4YK+soy
-                      12lFkcIiliBBhIIGKqjCQpx2nRQTGTpPevhHHL9ELoVcFTByLKAGDbLjB/+D3701i5MTblIo
-                      CfS92PbHKBDcBdpN2/4+tu32CeB/Bq70rr/WAmY+SW92tdgRMLQNXFx3NWUPuNwBhp/qsiE7
-                      kp+WUCwC72f0TXkgfAsMrLl965zj9AHIUq/SN8DBITBWoux1j3f39/bt35pO/34A2D1yz6K/
-                      wtcAAAAGYktHRAApADAAQokrMyYAAAAJcEhZcwAALiMAAC4jAXilP3YAAAAHdElNRQfnBBMT
-                      HQyYA+I1AAAAGXRFWHRDb21tZW50AENyZWF0ZWQgd2l0aCBHSU1QV4EOFwAAB25JREFUeNrt
-                      nUuOE0cch3/AkAQJCWeFlA0+QKRxToBZRoqUyQnSnCCTE2BygRl22UTjOQFcAKWRskhW49ll
-                      h1mymhmJiCQ8JgtXC8f0u+vV7u+TegGY7vL/Vb+qripLAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                      ABAVI0kPJE0xBYD13DqIJLf2JM17asexpMeEU1C+kfQzZoC+kEg6k3SJuAGwyn4kuTWR9Ktp
-                      R9rTgdelucA/X0r6rafxAwNkulbwLhE3AFZz6ySC3Mpmjdbb0afOKZH0fKP94I8vJP0i6V1P
-                      4wcGxkjS0UbBQNwAdGes1auTGHIr0YdZo76Jm0nOwAtx448bkn6S9FdP4yd65gXB3fQ6M8nS
-                      hseW2lDnmuc8v+zzbYtl2vCeM482uDRF2XYMdG2HC4G5CPS9Fub5Mfg3zy5nnr532WcVMLee
-                      d6hXdXxat3NKLNv/bMP+ZbjwTZscPYmkprhoS1FeVPn+aQufuW7zxOOzz7vm59xBYjVt0H5g
-                      YTNEcZN4iIXQwmZ9lH8euCjE4N9QBTxWcZPVq72A4iZx5IeTmgIntLhxGYtJRG1ZFPgjZnGz
-                      2WaX9rEubFwlVhOB41MJzlsm+baJm8Sj2A0tbNbj7FzhhE0s/g1RwGMWN9n1QwBxkziOgzoC
-                      J6S48dFZJhG0ZVHih1jFTV6bj4YubJoInJE+XsQWQtgMSdzUSfa5tkvY+BQ4ZYUstH9DFfA+
-                      iJtLU7x9iZvEU92rEjihxI3PWYAkYFsWFfaPUdw0fX02KGFTV+D4UoLzGjYZgrhpIijm2i5h
-                      40PgVBWykP4NWcD7Im6avM7pIm581d863ymEuPEpbKpyI2RexChu8to8lrv1eVaFDQAAAAAA
-                      AAAAAAAAAAAAAAAA5HOl4O8/MVce/5qrDTdL/u1Vzt9d0+p0xiLemasrl5LedGn/eDx+u1wu
-                      3zd98O3bt6+/fPmyyA+vc75fmW/qfo8q3sjOYsEbxoe24yg0VXH5qsO9Q/q3LD9fW8q1NrWh
-                      bZxcL6lxTXOrDu/NfS8b3Ped+T914yvv865j96ajWG8bD11jsWldqtuWKybmupDXp12X9GnD
-                      eHCRT5ux/nbtz59J2nH8TJlnvu9yg5mKVyvPOoqIpqvuZ/KzUn6/Y/tdXNMA9kgsFqjUURyF
-                      Zip3O0hC+tfFbkAbtSGG3DqsiOeyE43L7ps2jK80QOyG2C3lMhab1qUmbUk6xmXe88vuGctu
-                      qZH8nBH2XDV3Ku60CIw7ku567EhmJoBcP/PABP1iwDN591VvSzzg36FxburQXNL3JZ8ba/U7
-                      TPclPcFsgyPLr6Mt/X6nJg/Oc/Jjz8S+S8bGtt+5EDeJ/J9BkhjRccvxc44k3ctxHB0f4F/I
-                      alFa0XmNtPodvH1JjzAZAmfLhU1GKumhpAeO27Fncuuw7ENXe2LUpSdBNdFqBoeOD/AvlHVe
-                      9yRdVHzucItH8FAdI8cDEjYZM0nPPLTnQBWH+e30yLhPTJEeWxIx35aMzJ616AyOjQhrMxK8
-                      Y8lGL1q0eyGmz/vCUP37sOX/s5lbeaPUqfHHbkUbYJgkKv6Zgjs9y6dD1X+jkc2s2GBfxW9s
-                      Hkv6qqhdOz0LFpujz1TF63gOTFAuGrYtbdGOqcVAX6rfC3UB/xaNBhU4t4qE49SIx7uEJxSI
-                      At9x6Sqf6nJu8RmpitfxjFWy/ubqgIOubEQ1UsX7PAAAfVhofIwpAKyTqnzd2p4Kds+1ETcP
-                      tdrP3+aKiapFTzPiCgAaDJbuYwYAq0xUvjvxVAVvTHZ6+EVt7JjaU/nMzSN1P08iBLdkd3r8
-                      QsPeGr/t/n2h/68TuyjJr13ZPdfkVNu3K3Fu7PmkY506dxgDuxU+aYrt13HP1tqy6ygWy3yz
-                      KLCLzbbcaul7W7jyWcaoIs6a5tSopH/aa3rDmeI5xG99ZOTjcK9Fy/ZPW9okVVyH+Nn8aflU
-                      HOJnM/dcH8Q1kZ+DuOaWa4OP3GoSrxNj3zq2SAPXu+xalnQivtqQbHSQC882KBrw+mrLvEUs
-                      PI3IZ5mtTgL7S1J/1twk8rOlspUS3EIuTPFn1mZ7/ZvkjBKzBbIXDp99rO3fQZTZscuW2Ln8
-                      vebK6l7ImbTN4wqyQ+EuAj1/czZl2nJma5vzYtNmI60W/048PPtYFRuM+iBufAmb7FlLOj6E
-                      zYD961LgDEHYbHaIXRYa+xA4MeR7kbBYehDbVcLGh8BB2DTjVDW2mscubnwKm2Nx3gvCBv+6
-                      EjhDEjabNayLQHEpcGLI9x8rhIXr2cQmB1y6EDgIm3Y5VTnLeDXyouBL2NRSgnR8MCD/2uxU
-                      hips1gXKvQ62dCFwYsj3Y9U7csOVwGlzcrfN12UIm3ZiuFPMzlS84GkkgHqMTMwMZUFxKve/
-                      ng0AAJbETepRmcH2MdHHO1e2SdwsxTH7AAC9ETdLsXsI7LFnYmqbxM1MzGYCAETFtZKR9h+m
-                      M/oTM4El/tTqNdU/Wr27/r2n32Ms6XNJX2u1CP1vXAsAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-                      ABAB/wHuSQ8zu8sBfwAAAABJRU5ErkJggg==
+              <text:p text:style-name="MasterPage.Header.Center">
+                <draw:frame draw:style-name="fr1" draw:name="Bild1" text:anchor-type="as-char" svg:width="5.971cm" svg:height="0.45cm" draw:z-index="1">
+                  <draw:image draw:mime-type="image/svg+xml">
+                    <office:binary-data>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCEtLSBDcmVhdGVkIHdp
+                     dGggSW5rc2NhcGUgKGh0dHA6Ly93d3cuaW5rc2NhcGUub3JnLykgLS0+Cjxzdmcgd2lkdGg9
+                     IjE1MG1tIiBoZWlnaHQ9IjExbW0iIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDE1MCAx
+                     MSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDxnPgogIDxnIHN0cm9r
+                     ZS13aWR0aD0iLjI2NDU4IiBhcmlhLWxhYmVsPSJBc2hldCBUZWNobm9sb2dpZXMiPgogICA8
+                     cGF0aCBkPSJtOS4wMDI1IDguNjMyN2gtMS44OTQ0di0xLjc5OTJoLTMuNzg4OHYxLjc5OTJs
+                     LTEuODgzOCAxLjA2ODl2LTUuODk0OWwxLjQxODItMS40MTgyaDQuNzMwN2wxLjQxODIgMS40
+                     MTgyem0tMS44OTQ0LTMuMTc1di0xLjY3MjJoLTMuNzg4OHYxLjY3MjJ6Ii8+CiAgIDxwYXRo
+                     IGQ9Im0xOC43NSA2LjcwNjUtMS40MTgyIDEuOTE1NmgtNy4yMzlsMS4zODY0LTEuMzg2NGg0
+                     Ljc1MTlsMC40NDQ1LTAuNTI5MTYtMC40NDQ1LTAuNTYwOTFoLTQuNzYyNWwtMS4zNzU4LTEu
+                     ODQxNSAxLjQxODItMS45MTU2aDcuMjM5bC0xLjM5NyAxLjM4NjRoLTQuNzQxM2wtMC40NTUw
+                     OCAwLjUyOTE2IDAuNDU1MDggMC41NjA5MWg0Ljc2MjV6Ii8+CiAgIDxwYXRoIGQ9Im0yNy4z
+                     MzMgOC42MzI3aC0xLjg4Mzh2LTIuNDg3MWgtMy43MjUzdjIuNDg3MWwtMS44ODM4LTAuMDEw
+                     NTgzdi02LjIzMzZoMS44ODM4djIuNDg3MWgzLjcyNTN2LTIuNDg3MWwxLjg4MzgtMS4wOTAx
+                     eiIvPgogICA8cGF0aCBkPSJtMzYuMTcgMi4zODg1LTEuMzg2NCAxLjM5N2gtNC4xOTF2MS4w
+                     OTAxaDQuNjY3MmwtMS4yNyAxLjI3aC0zLjM5NzJ2MS4wOTAxaDUuMzU1MWwtMS4zOTcgMS4z
+                     OTdoLTUuODQydi02LjI0NDF6Ii8+CiAgIDxwYXRoIGQ9Im00NS4xNDUgMi4zODg1LTEuMzg2
+                     NCAxLjM4NjRoLTEuODUyMXY1LjkyNjZsLTEuODgzOC0xLjA3OTV2LTQuODQ3MmgtMS44NTIx
+                     bC0xLjM4NjQtMS4zODY0eiIvPgogICA8cGF0aCBkPSJtNTkuNTggMi4zODg1LTEuMzg2NCAx
+                     LjM4NjRoLTEuODUyMXY0Ljg0NzJsLTEuODgzOCAxLjA3OTV2LTUuOTI2NmgtMS44NTIxbC0x
+                     LjM4NjQtMS4zODY0eiIvPgogICA8cGF0aCBkPSJtNjcuOTA5IDIuMzg4NS0xLjM4NjQgMS4z
+                     OTdoLTQuMTkxdjEuMDkwMWg0LjY2NzJsLTEuMjcgMS4yN2gtMy4zOTcydjEuMDkwMWg1LjM1
+                     NTJsLTEuMzk3IDEuMzk3aC01Ljg0MnYtNi4yNDQxeiIvPgogICA8cGF0aCBkPSJtNzUuOTg0
+                     IDIuMzg4NS0xLjM4NjQgMS4zOTdoLTQuMTkxdjMuNDUwMmg1LjM1NTFsLTEuMzk3IDEuMzk3
+                     aC00LjQyMzhsLTEuNDE4Mi0xLjQxODJ2LTMuNDA3OGwxLjQxODItMS40MTgyeiIvPgogICA8
+                     cGF0aCBkPSJtODQuMjA3IDguNjMyN2gtMS44ODM4di0yLjQ4NzFoLTMuNzI1M3YyLjQ4NzFs
+                     LTEuODgzOC0wLjAxMDU4M3YtNi4yMzM2aDEuODgzOHYyLjQ4NzFoMy43MjUzdi0yLjQ4NzFs
+                     MS44ODM4LTEuMDkwMXoiLz4KICAgPHBhdGggZD0ibTkzLjMyIDguNjIyMWgtMS40Mjg3bC00
+                     LjQyMzgtMy42NDA3djMuNjQwN2wtMS44ODM4LTAuMDEwNTgzdi02LjIyM2gxLjM0NDFsNC41
+                     MDg1IDMuNzE0N3YtMy43MTQ3bDEuODgzOC0xLjA5MDF6Ii8+CiAgIDxwYXRoIGQ9Im0xMDIu
+                     NjUgNy4yMDM5LTEuNDE4MiAxLjQxODJoLTUuMTk2NGwtMS40MTgyLTEuNDE4MnYtMy4zOTcy
+                     bDEuNDE4Mi0xLjQxODJoNS4xOTY0bDEuNDE4MiAxLjQxODJ6bS0xLjg4MzggMC4wMzE3NXYt
+                     My40NjA3aC00LjI2NTF2My40NjA3eiIvPgogICA8cGF0aCBkPSJtMTExLjIxIDcuMjM1Ny0x
+                     LjM5NyAxLjM5N2gtNS44NDJ2LTYuMjQ0MWwxLjg4MzgtMS4wOTAxdjUuOTM3MnoiLz4KICAg
+                     PHBhdGggZD0ibTExOS42OSA3LjIwMzktMS40MTgyIDEuNDE4MmgtNS4xOTY0bC0xLjQxODIt
+                     MS40MTgydi0zLjM5NzJsMS40MTgyLTEuNDE4Mmg1LjE5NjRsMS40MTgyIDEuNDE4MnptLTEu
+                     ODgzOCAwLjAzMTc1di0zLjQ2MDdoLTQuMjY1MXYzLjQ2MDd6Ii8+CiAgIDxwYXRoIGQ9Im0x
+                     MjguNCAyLjM4ODUtMS4zODY0IDEuMzk3aC00LjE5MXYzLjQ1MDJoMy40NzEzdi0xLjA5MDFo
+                     LTEuMjkxMmwtMS4yNy0xLjI3aDQuNDQ1djIuMzYwMWwtMS4zOTcgMS4zOTdoLTQuNDIzOGwt
+                     MS40MTgyLTEuNDE4MnYtMy40MDc4bDEuNDE4Mi0xLjQxODJ6Ii8+CiAgIDxwYXRoIGQ9Im0x
+                     MzEuNDMgOC42MzI3LTEuODgzOC0wLjAxMDU4M3YtNi4yMzM2bDEuODgzOC0xLjA5MDF6Ii8+
+                     CiAgIDxwYXRoIGQ9Im0xNDAuMjcgMi4zODg1LTEuMzg2NCAxLjM5N2gtNC4xOTF2MS4wOTAx
+                     aDQuNjY3MmwtMS4yNyAxLjI3aC0zLjM5NzJ2MS4wOTAxaDUuMzU1MmwtMS4zOTcgMS4zOTdo
+                     LTUuODQydi02LjI0NDF6Ii8+CiAgIDxwYXRoIGQ9Im0xNDguNTYgNi43MDY1LTEuNDE4MiAx
+                     LjkxNTZoLTcuMjM5bDEuMzg2NC0xLjM4NjRoNC43NTE5bDAuNDQ0NS0wLjUyOTE2LTAuNDQ0
+                     NS0wLjU2MDkxaC00Ljc2MjVsLTEuMzc1OC0xLjg0MTUgMS40MTgyLTEuOTE1Nmg3LjIzOWwt
+                     MS4zOTcgMS4zODY0aC00Ljc0MTNsLTAuNDU1MDggMC41MjkxNiAwLjQ1NTA4IDAuNTYwOTFo
+                     NC43NjI1eiIvPgogIDwvZz4KIDwvZz4KPC9zdmc+Cg==
                     </office:binary-data>
-                  </draw:image>
-                </draw:frame></text:p>
+                   </draw:image>
+                  </draw:frame>
+              </text:p>
             </table:table-cell>
-            <table:table-cell table:number-rows-spanned="2"
-              office:value-type="string">
-              <text:p text:style-name="Header_20_right">[DOCUMENT PART]</text:p>
+            <table:table-cell table:style-name="MasterPage.Table.Cell" office:value-type="string">
+              <text:p text:style-name="MasterPage.Header.Right">[DOCUMENT PART]</text:p>
             </table:table-cell>
-          </table:table-row>
-          <table:table-row table:style-name="HeaderTable.Base.1">
-            <table:covered-table-cell />
-            <table:table-cell office:value-type="string">
-              <text:p text:style-name="HeaderTable.Base.B.P">[DOCUMENT TITLE]</text:p>
-            </table:table-cell>
-            <table:covered-table-cell />
           </table:table-row>
         </table:table>
         <text:p text:style-name="Standard">
           <draw:line text:anchor-type="paragraph" draw:z-index="7" draw:name="Shape1"
-            draw:style-name="gr1" draw:text-style-name="P2" svg:x1="0.049cm" svg:y1="0cm"
-            svg:x2="17.603cm" svg:y2="0cm">
+            draw:style-name="gr1" draw:text-style-name="P2"
+            svg:x1="0.0cm" svg:y1="0cm"
+            svg:x2="17.0cm" svg:y2="0cm">
             <text:p />
           </draw:line>
-          <text:s text:c="7" />
         </text:p>
       </style:header>
       <style:footer>
-        <table:table table:name="FooterTable" table:style-name="FooterTable">
-          <table:table-column table:style-name="FooterTable.A" table:number-columns-repeated="3" />
+        <table:table table:name="MasterPage.Table" table:style-name="MasterPage.Table">
+          <table:table-column table:style-name="MasterPage.Table.Column.Outer" />
+          <table:table-column table:style-name="MasterPage.Table.Column.Center" />
+          <table:table-column table:style-name="MasterPage.Table.Column.Outer" />
           <table:table-row>
-            <table:table-cell table:style-name="FooterTable.A1" office:value-type="string">
-              <text:p text:style-name="Footer_20_left">[DOCUMENT ALTDATE] , [DOCUMENT REVISION]</text:p>
+            <table:table-cell table:style-name="MasterPage.Table.Base.Cell" office:value-type="string">
+              <text:p text:style-name="MasterPage.Footer.Left">[DOCUMENT ALTDATE], [DOCUMENT REVISION]</text:p>
             </table:table-cell>
-            <table:table-cell table:style-name="FooterTable.A1" office:value-type="string">
-              <text:p text:style-name="Standard" />
+            <table:table-cell table:style-name="MasterPage.Table.Base.Cell" office:value-type="string">
+              <text:p text:style-name="MasterPage.Footer.Center">[DOCUMENT TITLE]</text:p>
             </table:table-cell>
-            <table:table-cell table:style-name="FooterTable.A1" office:value-type="string">
-              <text:p text:style-name="Footer_20_right">Page <text:page-number
+            <table:table-cell table:style-name="MasterPage.Table.Base.Cell" office:value-type="string">
+              <text:p text:style-name="MasterPage.Footer.Right">Page <text:page-number
                   text:select-page="current">4</text:page-number><text:s />of <text:page-count>4</text:page-count><text:s /></text:p>
             </table:table-cell>
           </table:table-row>
