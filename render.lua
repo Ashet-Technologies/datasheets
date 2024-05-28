@@ -127,6 +127,35 @@ local function renderToXml(source_code)
   return body
 end
 
+local latex_patches = {
+  ["₂"] = "\\textsubscript{2}",
+  ["₁₀"] = "\\textsubscript{10}",
+  ["₀"] = "\\textsubscript{0}",
+  ["₁"] = "\\textsubscript{1}",
+  
+  ["≠"] = "$\\neq{}$",
+  ["≤"] = "$\\leq{}$",
+  ["≥"] = "$\\geq{}$",
+
+  ["\\begin{longtable}%[%]{@{}"] = "\\setlength\\LTleft\\parindent\n\\setlength\\LTright{0pt}\n\\begin{longtable}[]{@{}",
+  ["@{}}"] = "@{\\extracolsep{\\fill}}l}"
+}
+
+local function renderToLaTex(source_code)
+
+  local f = assert(io.open("temp/document.md", "wb"))
+  f:write(source_code)
+  f:close()
+
+  local body = capture("pandoc -f gfm -t latex temp/document.md")
+
+  for original, replacement in pairs(latex_patches) do
+    body = body:gsub(original, replacement)
+  end
+
+  return body
+end
+
 local function convertFile(source_file, mode)
 
   assert(mode == "release" or mode == "draft")
@@ -139,10 +168,16 @@ local function convertFile(source_file, mode)
     return nil
   end
 
-  local body = renderToXml(doc.source)
+  local body = renderToLaTex(doc.source)
+
+  local template = slurp("templates/datasheet.tex")
+
+  local contents = template:gsub("\\documentBody", body:gsub("%%", "%%%%"))
 
   renderDocument(
-    "temp/" .. base_name .. ".fodt", body, {
+    "temp/" .. base_name .. ".tex", 
+    contents, 
+    {
       ["DOCUMENT DATE"] = ("%s %04d"):format(months[doc.date.month], doc.date.year),
       ["DOCUMENT PART"] = doc.part,
       ["DOCUMENT TITLE"] = doc.title,
@@ -152,7 +187,8 @@ local function convertFile(source_file, mode)
     }
   )
 
-  capture("libreoffice --headless --convert-to pdf --outdir temp/ temp/" .. base_name .. ".fodt")
+  os.execute("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
+  os.execute("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
 
   output_file = "temp/" .. base_name .. ".pdf"
 

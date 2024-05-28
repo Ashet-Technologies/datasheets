@@ -25,6 +25,8 @@
             pkgs.lua5_3_compat
             pkgs.pandoc
             pkgs.libreoffice
+            pkgs.texliveFull
+            pkgs.inkscape
           ];
 
           configurePhase = "";

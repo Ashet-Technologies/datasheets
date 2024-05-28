@@ -116,7 +116,7 @@ Initial Value: _Undefined_
 
 16 bit register saving CPU state and interrupt system
 
-![flag register bitfield diagram](../figures/fr.svg)
+[flag register bitfield diagram](../figures/fr.svg)
 
 | Bit Range | Name       | Description                                      |
 | --------- | ---------- | ------------------------------------------------ |
@@ -135,7 +135,7 @@ Initial Value: `0x0000`
 
 16 bit register storing internal interrupt information.
 
-![interrupt register bitfield diagram](../figures/ir.svg)
+[interrupt register bitfield diagram](../figures/ir.svg)
 
 | Bit Range | Name         | Description                      |
 | --------- | ------------ | -------------------------------- |
@@ -157,7 +157,7 @@ Initial Value: `0x0001` (Reset interrupt triggered)
 
 Instructions use 16 bit opcodes organized in different bit fields defining the behaviour of the instruction.
 
-![instruction bitfield diagram](../figures/instruction.svg)
+[instruction bitfield diagram](../figures/instruction.svg)
 
 | Bit Range | Description                           |
 | --------- | ------------------------------------- |
