@@ -172,7 +172,18 @@ local function convertFile(source_file, mode)
 
   local template = slurp("templates/datasheet.tex")
 
-  local contents = template:gsub("\\documentBody", body:gsub("%%", "%%%%"))
+  local contents = template .. [[
+\begin{document}
+
+\onecolumn
+
+\pagestyle{normalpage}
+% \thispagestyle{firstpage}
+]] .. body .. [[
+\tableofcontents
+
+\end{document}
+]]
 
   renderDocument(
     "temp/" .. base_name .. ".tex", 
@@ -187,8 +198,8 @@ local function convertFile(source_file, mode)
     }
   )
 
-  os.execute("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
-  os.execute("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
+  capture("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
+  capture("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
 
   output_file = "temp/" .. base_name .. ".pdf"
 
