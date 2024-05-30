@@ -1,3 +1,38 @@
+io.path = {}
+
+function io.path.basename(path)
+  return assert(path:match("([%w\\-]+)%.%w+$"))
+end
+
+function io.path.filename(path)
+  return assert(path:match("([%w%-%.]+)$"))
+end
+
+function io.path.dirname(path)
+  local prefix = path:match("(.*/)[%w%-%.]+$") or "."
+  while #prefix > 1 and prefix:sub(#prefix, #prefix) == "/" do
+    prefix = prefix:sub(1, #prefix - 1)
+  end
+  if prefix == "/" then
+    return prefix
+  end
+  return prefix
+end
+
+assert(io.path.basename("../figures/fr.svg") == "fr")
+assert(io.path.filename("../figures/fr.svg") == "fr.svg")
+assert(io.path.dirname("../figures/fr.svg") == "../figures")
+assert(io.path.dirname("/figures/fr.svg") == "/figures")
+assert(io.path.dirname("fr.svg") == ".")
+
+function delete(...)
+  local paths = { ... }
+  for i=1,#paths do
+    io.stderr:write(("deleting %s...\n"):format(paths[i]))
+    os.remove(paths[i])
+  end
+end
+
 function slurp(fn)
   local f = assert(io.open(fn, "rb"))
   local all = f:read("*all")
@@ -5,7 +40,7 @@ function slurp(fn)
   return all
 end
 
-function capture(command)
+function capture(command, stdin)
   io.stderr:write(command .. "\n")
 
   local p = assert(io.popen(command, "r"))
@@ -138,32 +173,22 @@ local function renderToXml(source_code)
   return body
 end
 
-io.path = {}
+local converted_images = {}
 
-function io.path.basename(path)
-  return assert(path:match("([%w\\-]+)%.%w+$"))
-end
+local function convert_svg_file(rel_path)
+  local src_path = io.path.dirname(arg[1]) .. "/" .. rel_path 
+  local out_path = converted_images[src_path]
 
-function io.path.filename(path)
-  return assert(path:match("([%w%-%.]+)$"))
-end
-
-function io.path.dirname(path)
-  local prefix = path:match("(.*/)[%w%-%.]+$") or "."
-  while #prefix > 1 and prefix:sub(#prefix, #prefix) == "/" do
-    prefix = prefix:sub(1, #prefix - 1)
+  if out_path == nil then
+    out_path = io.path.basename(rel_path) .. ".pdf"
+    capture(("inkscape -o temp/%s %s"):format(out_path, src_path))
+    converted_images[src_path] = out_path
   end
-  if prefix == "/" then
-    return prefix
-  end
-  return prefix
-end
 
-assert(io.path.basename("../figures/fr.svg") == "fr")
-assert(io.path.filename("../figures/fr.svg") == "fr.svg")
-assert(io.path.dirname("../figures/fr.svg") == "../figures")
-assert(io.path.dirname("/figures/fr.svg") == "/figures")
-assert(io.path.dirname("fr.svg") == ".")
+  return ("\\includegraphics[width=\\textwidth]{%s}\\\\"):format(
+    out_path
+  )
+end
 
 local latex_patches = {
   ["₂"] = "\\textsubscript{2}",
@@ -178,17 +203,8 @@ local latex_patches = {
   ["\\begin{longtable}%[%]{@{}"] = "\\setlength\\LTleft\\parindent\n\\setlength\\LTright{0pt}\n\\begin{longtable}[]{@{}",
   ["@{}}"] = "@{\\extracolsep{\\fill}}l}",
 
-  ["\\includesvg{([^}]*)}"] = function(rel_path)
-    src_path = io.path.dirname(arg[1]) .. "/" .. rel_path 
-
-    out_path = io.path.basename(rel_path) .. ".pdf"
-    
-    capture(("inkscape -o temp/%s %s"):format(out_path, src_path))
-
-    return ("\\includegraphics[width=\\textwidth]{%s}\\\\"):format(
-      out_path
-    )
-  end,
+  ["\\includesvg{([^}]*%.svg)}"] = convert_svg_file,
+  ["\\includegraphics{([^}]*%.svg)}"] = convert_svg_file,
 }
 
 local function renderToLaTex(source_code)
@@ -239,7 +255,7 @@ local function convertFile(source_file, mode)
 ]]
 
   renderDocument(
-    "temp/" .. base_name .. ".tex", 
+    "temp/document.tex", 
     contents, 
     {
       ["DOCUMENT DATE"] = ("%s %04d"):format(months[doc.date.month], doc.date.year),
@@ -251,13 +267,22 @@ local function convertFile(source_file, mode)
     }
   )
 
-  capture("pdflatex -cnf-line=max_print_line=2000 -interaction=nonstopmode -halt-on-error -shell-escape -output-directory=temp/ temp/" .. base_name .. ".tex")
-  capture("pdflatex -cnf-line=max_print_line=2000 -interaction=nonstopmode -halt-on-error -shell-escape -output-directory=temp/ temp/" .. base_name .. ".tex")
+  capture("pdflatex -cnf-line=max_print_line=2000 -interaction=nonstopmode -halt-on-error -shell-escape -output-directory=temp/ temp/document.tex")
+  capture("pdflatex -cnf-line=max_print_line=2000 -interaction=nonstopmode -halt-on-error -shell-escape -output-directory=temp/ temp/document.tex")
 
   output_file = "temp/" .. base_name .. ".pdf"
 
-  os.remove("temp/" .. base_name .. ".fodt")
-  os.remove("temp/document.md")
+  for src_path, dst_path in pairs(converted_images) do 
+    delete("temp/" .. dst_path)
+  end
+
+  delete("temp/document.tex")
+  delete("temp/document.log")
+  delete("temp/document.aux")
+  delete("temp/document.toc")
+  delete("temp/document.out")
+  delete("temp/document.md")
+  os.rename("temp/document.pdf", output_file)
 
   return {
     folder = doc.type .. "s",
