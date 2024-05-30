@@ -12,6 +12,7 @@ function capture(command)
   local str = assert(p:read("*all"))
   local success, kind, code = p:close()
   if not success or kind ~= "exit" or code ~= 0 then 
+    io.stderr:write(str)
     io.stderr:write(("command failed: %s(%s)\n"):format(
       tostring(kind),
       tostring(code)
