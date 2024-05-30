@@ -7,7 +7,7 @@
 	revision = Version(0,1),
 }
 
-# BasicVGA
+# Overview
 
 Planned features:
 

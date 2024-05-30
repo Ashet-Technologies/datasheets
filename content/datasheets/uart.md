@@ -7,18 +7,18 @@
     revision = Version(0,1),
 }
 
-# SerialPro 550
+# Overview
 
 A 16C550 compatible UART component.
 
 - [Features](#features)
 - [Registers](#registers)
 
-## Features
+# Features
 
 The SerialPro 550 is a 16C550 compatible UART implementation that provides a fully featured UART interface including flow- and modem control.
 
-## Registers
+# Registers
 
 | Offset  | Name | Size | Access | Description                           |
 | ------- | ---- | ---- | ------ | ------------------------------------- |

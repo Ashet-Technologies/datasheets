@@ -7,11 +7,11 @@
     revision = Version(1,0),
 }
 
-# MicroTick 16
+# Overview
 
 Each timer runs at a defined frequency that is not necessarily the cpu frequency.
 
-## Registers
+# Registers
 
 | Offset  | Size | Access | Description |
 | ------- | ---- | ------ | ----------- |
@@ -22,7 +22,7 @@ Each timer runs at a defined frequency that is not necessarily the cpu frequency
 
 `Timer Value` increments each time `Prescaler`-1 clocks have happened. When `Timer Value` reaches `Timer Limit`, the `Timer Value` is reset to 0 and a IRQ is raised if enabled.
 
-### Status / Control
+## Status / Control
 
 | Bit Range | Description           |
 | --------- | --------------------- |

@@ -71,28 +71,17 @@
 \gdef\@partno{}
 \newcommand{\partno}[1]{\gdef\@partno{#1}}
 
-% First page title layout is defined here
-% \renewcommand{\maketitle}{%
-%     \twocolumn[%
-%         {\@companylogo}\\
-%         \vspace{1cm}\\
-%         {\Huge\sffamily\bfseries\@title}\\
-%         \noindent\rule{\textwidth}{1pt}
-%         \medskip
-%         ]%
-%         \pagestyle{normalpage}
-%         \thispagestyle{firstpage}
-% }
-
 % First page has footer but no header
 \RequirePackage{fancyhdr}
 \RequirePackage{lastpage}
 \fancypagestyle{firstpage}{
-    \fancyhf{}
-    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\headrulewidth}{0.5pt}
     \renewcommand{\footrulewidth}{0.5pt}
-    \fancyfoot[L]{\@revision}
-    \fancyfoot[C]{\@date}
+    \fancyhead[L]{\@date}
+    \fancyhead[C]{\includegraphics[height=12pt]{\@companylogo}}
+    \fancyhead[R]{\@partno}
+    \fancyfoot[L]{\@altdate, \@revision}
+    \fancyfoot[C]{\@title}
     \fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
 }
 

@@ -7,9 +7,7 @@
     revision = Version(0,1),
 }
 
-# Ethernet Interface
-
-## Registers
+# Registers
 
 | Offset  | Size | Access | Description           |
 | ------- | ---- | ------ | --------------------- |
@@ -20,7 +18,7 @@
 | `0x006` | 2    | R      | Send Packet Length    |
 | `0x008` | 6\*1 | R      | Interface MAC address |
 
-### `Control/Status`
+## `Control/Status`
 
 | Bit Range | Name  | Access | Description                                                                                                                                           |
 | --------- | ----- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -37,16 +35,16 @@
 | `[10]`    | `PBC` | R      | Is `1` when the currently ready receive packet has a broadcast MAC address.                                                                           |
 | `[15:11]` |       |        | _reserved_, must be 0                                                                                                                                 |
 
-### `Receive Packet Length`
+## `Receive Packet Length`
 
 When a incoming packet is signalled via the `RTR` bit, this register will contain the remaining bytes of the packet to be read.
 
 Each read on the `Receive Data Register` will decrement this value until it reaches 0.
 
-### `Send Packet Length`
+## `Send Packet Length`
 
 Contains the current number of bytes written into the `Send Data Register`. If 0, no bytes are currently in the send buffer.
 
-### `Interface MAC address`
+## `Interface MAC address`
 
 These six byte contain the MAC address of the ethernet interface.

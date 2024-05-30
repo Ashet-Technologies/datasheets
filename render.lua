@@ -117,6 +117,9 @@ local function loadDocument(path)
     -- values for "status"
     DRAFT = "draft",
     PUBLISHED = "published",
+
+	  ONE_COLUMN = "\\onecolumn",
+	  TWO_COLUMN = "\\twocolumn",
   }
 
   function header_env.Date(y, m, d)
@@ -138,6 +141,7 @@ local function loadDocument(path)
     part = assert(tostring(header.part)),
     date = assert(header.date),
     revision = assert(header.revision),
+    layout = assert(header.layout or header_env.ONE_COLUMN),
 
     source = assert(tostring(markdown_source)),
   }
@@ -154,6 +158,8 @@ local function loadDocument(path)
   )
 
   assert(doc.status ~= header_env.PUBLISHED or doc.revision.major > 0)
+
+  assert(doc.layout == header_env.ONE_COLUMN or doc.layout == header_env.TWO_COLUMN)
 
   return doc
 end
@@ -241,10 +247,17 @@ local function convertFile(source_file, mode)
   local contents = template .. [[
 \begin{document}
 
-\onecolumn
-
 \pagestyle{normalpage}
-% \thispagestyle{firstpage}
+\thispagestyle{firstpage}
+
+]] .. doc.layout .. [[
+
+\begin{center}
+%\vspace{1cm}
+\Huge\sffamily\bfseries ]] .. doc.title .. [[\\
+%\noindent\rule{\textwidth}{1pt}
+\end{center}
+
 ]] .. body .. [[
 
 \newpage

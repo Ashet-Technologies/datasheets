@@ -5,13 +5,35 @@
 	part = "ACT-SPU-II",
 	date = Date(2024,05,26),
 	revision = Version(1,12),
+	layout = ONE_COLUMN,
 }
 
-# The SPU Mark II Architecture
+# SPU Mark II Architecture
 
-## Documentation Style
+The SPU Mark II (Stack Processing Unit Mark II) is a 16 bit processor that, in contrary to the most popular CPUs, works primarily with a stack instead of registers. It features a RISC instruction set with highly configurable instructions. Although being a stack processor it still requires some basic registers to work. These registers are either accessed indirectly (like the `IP` register) or by special instructions (like `BP` or `SP` register).
 
-### Numbers
+Each instruction is composed of a _configuration_ part and a _command_ part. Commands are the actual function of the instruction like `STORE8` or `MUL`. Each command has two input variables `input0` and `input1` which contain the two command parameters. A command also has an output value.
+
+In which way the command parameters are filled and the result is processed is defined by the _configuration_ bits of the instruction. These bits allow conditional execution, input parameter modification, affect flags and define how the result of the command is processed.
+
+As each instruction may be conditional, there are no special conditional jump commands. In fact, there isn't even a jump command at all. A jump is done by taking the output of a command to be the next instruction pointer.
+
+Thus, the most simple `COPY` command can be used already for a whole set of different operations: `jmp $imm`, `push $imm`, `pop` and many more.
+
+
+# CPU Variants
+
+This document specifies two different variants for the SPU Mark II architecture:
+
+- SPU Mark II
+- SPU Mark II-L
+
+The SPU Mark II-L is a reduced version of the default instruction set and features no interrupt handling, thus making an implementation of the ISA much easier.
+
+
+# Documentation Style
+
+## Numbers
 
 Numbers are documented in three ways:
 
@@ -24,7 +46,7 @@ Examples:
 - Binary: `10`₂, `1100101`₂
 - Mixed binary and decimal: `10`₂ (2₁₀), `1100`₂ (12₁₀)
 
-### Bit Ranges
+## Bit Ranges
 
 This document uses some special notations to define bit ranges or indices.
 
@@ -34,52 +56,31 @@ This document uses some special notations to define bit ranges or indices.
 
 So `[3]` means the the bit with the significance of `2³` and `[7:4]` is the upper nibble of a 8 bit word.
 
-### Wording
+## Wording
 
-#### Undefined (value)
+### Undefined (value)
 
 If a value is defined undefined, its initial value may be any possible value. The value may change between power cycles or even after a reset. Each bit must be considered random.
 
-#### _Undefined behavior_
+### _Undefined behavior_
 
 Undefined behavior is used similar to the way the C standard uses this word. It means that if a situation happens where undefined behavior would occur, the results of the operation may be anything. This can be a _no-op_, any state or memory change or even a CPU hang or hard reset (may even requires a power cycle).
 
-## CPU Variants
+## Basic Properties
 
-This document specifies two different variants for the SPU Mark II architecture:
-
-- SPU Mark II
-- SPU Mark II-L
-
-The SPU Mark II-L is a reduced version of the default instruction set and features no interrupt handling, thus making an implementation of the ISA much easier.
-
-## SPU Mark II Architecture
-
-The SPU Mark II (Stack Processing Unit Mark II) is a 16 bit processor that, in contrary to the most popular CPUs, works primarily with a stack instead of registers. It features a RISC instruction set with highly configurable instructions. Although being a stack processor it still requires some basic registers to work. These registers are either accessed indirectly (like the `IP` register) or by special instructions (like `BP` or `SP` register).
-
-Each instruction is composed of a _configuration_ part and a _command_ part. Commands are the actual function of the instruction like `STORE8` or `MUL`. Each command has two input variables `input0` and `input1` which contain the two command parameters. A command also has an output value.
-
-In which way the command parameters are filled and the result is processed is defined by the _configuration_ bits of the instruction. These bits allow conditional execution, input parameter modification, affect flags and define how the result of the command is processed.
-
-As each instruction may be conditional, there are no special conditional jump commands. In fact, there isn't even a jump command at all. A jump is done by taking the output of a command to be the next instruction pointer.
-
-Thus, the most simple `COPY` command can be used already for a whole set of different operations: `jmp $imm`, `push $imm`, `pop` and many more.
-
-### Basic Properties
-
-#### Word Encoding and Signedness
+### Word Encoding and Signedness
 
 The SPU Mark II uses the little endian encoding, so the less significant byte is at the lower address, the more significant byte at the higher address.
 
 Integer arithmetic uses two-complement signed integers. This allows most arithmetic instructions to be used with signed and unsigned values.
 
-#### Memory Access
+### Memory Access
 
 The cpu only allows aligned memory access for word access. Unaligned word access must be programmed manually.
 
-### CPU Registers
+## CPU Registers
 
-#### Stack Pointer (_SP_)
+### Stack Pointer (_SP_)
 
 16 bit register storing the address of the topmost value of the stack. The stack grows downwards, so a _push_ operation decrements the `SP` by two and then stores a value to the decremented address. A _pop_ or _peek_ operation reads the value from `SP`, and for _pop_, `SP` will be incremented by 2.
 
@@ -92,7 +93,7 @@ The cpu only allows aligned memory access for word access. Unaligned word access
 
 Initial Value: _Undefined_
 
-#### Base Pointer (_BP_)
+### Base Pointer (_BP_)
 
 16 bit register that may be used for indirect addressing via `GET` and `SET` commands and may be used as a _frame pointer_ or _index register_.
 
@@ -105,7 +106,7 @@ Initial Value: _Undefined_
 
 Initial Value: _Undefined_
 
-#### Instruction Pointer (_IP_)
+### Instruction Pointer (_IP_)
 
 16 bit register pointing to the instruction to be executed next.
 
@@ -118,7 +119,7 @@ Initial Value: _Undefined_
 
 Initial Value: _Undefined_
 
-#### Flag Register (_FR_)
+### Flag Register (_FR_)
 
 16 bit register saving CPU state and interrupt system
 
@@ -137,7 +138,7 @@ Initial Value: `0x0000`
 
 > **Note:** The flags `I[3:0]` are not available in _SPU Mark II-L_
 
-#### Interrupt Register (_IR_)
+### Interrupt Register (_IR_)
 
 16 bit register storing internal interrupt information.
 
@@ -159,7 +160,7 @@ Initial Value: `0x0001` (Reset interrupt triggered)
 
 > **Note:** Not available in _SPU Mark II-L_
 
-### Instruction Encoding
+## Instruction Encoding
 
 Instructions use 16 bit opcodes organized in different bit fields defining the behaviour of the instruction:
 
@@ -175,7 +176,7 @@ Instructions use 16 bit opcodes organized in different bit fields defining the b
 | `[14:9]`  | Command                               |
 | `[15:15]` | Reserved for future use (must be `0`) |
 
-#### Conditional Execution
+### Conditional Execution
 
 This field determines when the command is executed or ignored. The execution is dependent on the current state of the flags.
 
@@ -192,7 +193,7 @@ This allows conditional execution of all possible opcodes.
 | `110`₂ (6₁₀) | ≤0          | The command is executed when result is zero or negative (`Z=1` or `N=1`) |
 | `111`₂ (7₁₀) | Overflow    | The command is executed when _Carry_ is set.                             |
 
-#### Argument Input 0 and 1
+### Argument Input 0 and 1
 
 These two fields define what arguments are provided to the executed command.
 
@@ -207,7 +208,7 @@ _Zero_ means that the argument will be zero, _Immediate_ means that it will be f
 
 `input0` is fetched before `input1` so when both arguments pop a value, `input0` receives the stack top and `input1` receives the value one below the stack top. Likewise, when both arguments use the _Immediate_ option, the value for `input0` must located directly after the opcode, `input1` directly after `input0`.
 
-#### Flag Modification
+### Flag Modification
 
 When the flag modification is enabled, the current `N` and `Z` flags will be overwritten by this command. Otherwise the flags stay as they were before the instruction.
 
@@ -226,7 +227,7 @@ The flags are modified according to this table:
 | **CE** | unchanged          |
 | **I**  | unchanged          |
 
-#### Output Behaviour
+### Output Behaviour
 
 Each command may output a value which can be processed in various ways. The output could be pushed to the stack, the command could be made into a jump or the output could be ignored.
 
@@ -237,7 +238,7 @@ Each command may output a value which can be processed in various ways. The outp
 
 For _Jump Relative_, the instruction pointer will point to the next instruction plus `output` words. `output` is considered a two-complements signed number. This differs from the _Jump_ behavior which takes an address, not a word offset.
 
-#### Commands
+### Commands
 
 Commands are what define the core behaviour of the opcode. They allow arithmetics, modification of memory, changing system registers and so on.
 
@@ -329,21 +330,21 @@ If a register has a subscript `₀`, it means that this refers to the value _bef
 
 In all other cases when one of the carry modifying command is invoked, carry is cleared. Other commands then those specified above will not modify carry in any way.
 
-##### `CPUID`
+#### `CPUID`
 
 This instruction is meant to return the current set of CPU features or possible future extensions. For now, this instruction requires both `input0` and `input1` to be zero, the output will be `zero` as well.
 
-##### `HALT`
+#### `HALT`
 
 Stops execution of instructions until an interrupt happens _and_ interrupts are enabled.
 
-### Memory Access
+## Memory Access
 
 Only 2-aligned access to memory is possible with code or data. Only exception are the `STORE8` and `LOAD8` commands which allow 1-aligned memory access.
 
 When accessing memory with alignment, the least significant address bit is reserved and must be `0`. If the bit is `1`, the behavior is undefined.
 
-### Fetch-Execute-Cycle
+## Fetch-Execute-Cycle
 
 This pseudocode documents what the CPU does in detail when execution a single instruction.
 
@@ -426,7 +427,7 @@ else
 		IP += 2
 ```
 
-### Interrupt handling
+## Interrupt handling
 
 > **Note:** Interrupt handling is not available in _SPU Mark II-L_
 
@@ -436,11 +437,11 @@ When an interrupt is triggered the CPU pushes the current instruction pointer to
 
 The reset interrupt is a special interrupt that does not push the return address to the stack. It also resets the Interrupt Register and the Flag Register.
 
-#### Masking
+### Masking
 
 If an interrupt is masked via the Flag Register (corresponding bit is _0_) it won't be triggered (the Interrupt Register bit can't be set).
 
-#### Interrupt Table
+### Interrupt Table
 
 It is possible to assign each interrupt another handler address. The entry points for those handlers are stored in the Interrupt Table at memory location `0x0000`:
 
@@ -455,15 +456,15 @@ It is possible to assign each interrupt another handler address. The entry point
 | 6   | RESERVED  | `0x0C`          |
 | 7   | IRQ       | `0x0E`          |
 
-##### Reset
+#### Reset
 
 This interrupt resets the CPU and defines the program entry point.
 
-##### NMI
+#### NMI
 
 This interrupt is the non-maskable external interrupt. If the `NMI` pin is signalled, the interrupt will be triggered.
 
-##### BUS
+#### BUS
 
 This interrupt is a non-maskable external interrupt.
 
@@ -471,25 +472,25 @@ The `BUS` interrupt is meant for an MMU interface and will prevent the currently
 
 _Remarks: It is required that the BUS interrupt happens while doing a memory operation. If after a memory read or write cycle the `BUS` pin is signalled, the CPU will assume as bus error and will trigger this interrupt._
 
-##### ARITH
+#### ARITH
 
 This interrupt is triggered when an error happens in the ALU. The reasons may be:
 
 - Division by zero
 
-##### SOFTWARE
+#### SOFTWARE
 
 This interrupt is meant to be triggered by executing `CPUCTRL` and will never be triggered by either peripherial hardware or internal circumstances.
 
-##### IRQ
+#### IRQ
 
 This interrupt is the maskable external interrupt. If the `IRQ` pin is signalled, the interrupt will be triggered.
 
-#### Priorities
+### Priorities
 
 Before execution of each instruction the cpu checks if any interrupt is triggered. The handler for the lowest interrupt triggered will then be activated.
 
-## External Interface
+# External Interface
 
 - 16 output address lanes
 - 16 in/out data lanes
@@ -502,13 +503,13 @@ Before execution of each instruction the cpu checks if any interrupt is triggere
 - input IRQ signal
 - output TYPE signal (tells if memory access is for code or data)
 
-## Changelog
+# Changelog
 
-### v1.12
+## v1.12
 
 - Renames "Chip I/Os" section to "External Interface"
 
-### v1.11
+## v1.11
 
 - Removes `CPUCTRL` instruction
 - Removes output behaviour `jump` and `rjmp`
@@ -534,19 +535,19 @@ TODO: Improve description of the state machine + transitions
 
 TODO: Make shifts take `input1` the number of bits to shift.
 
-### v1.10
+## v1.10
 
 - Introduces `CPUID` and `CPUCTRL`
 - Introduces `SOFTWARE` interrupt.
 
-### v1.9
+## v1.9
 
 - Introduces the concept of _Carry_
 - Adds new execution modifier _Overflow_ that allows checking for carry
 - Changes `ADD` and `SUB` to respect the _Carry_ and _Carry Enable_ bit
 - Changes `ADD`, `SUB` and `MUL` to change the _Carry_ bit
 
-### v1.8
+## v1.8
 
 - Removes `NEG` command
 - Replaces free command slot with `SIGNEXT`
@@ -555,23 +556,23 @@ TODO: Make shifts take `input1` the number of bits to shift.
 - Improves register description for `SP`
 - Adds some clarification on the pseudo code in the _Command_ table
 
-### v1.7
+## v1.7
 
 - Makes `frset`, `spset`, `bpset` return the previous value instead of the newly set.
   This allows improved or shorting handling of safed parameters.
 
-### v1.6
+## v1.6
 
 - Fixed typo in IP description
 
-### v1.5
+## v1.5
 
 - Textual architecture description
 - Improves overall document quality.
 - Introduces _SPU Mark II-L_ (Version with no interrupt handling)
 - **FRGET** now also provides a masked register access
 
-### v1.4
+## v1.4
 
 - Reorderes IRQ table
 - FIX: Missing interrupt 6 from IRQ table
@@ -579,7 +580,7 @@ TODO: Make shifts take `input1` the number of bits to shift.
 - Makes `BUS` nonmaskable
 - Allows **FRSET** to have a masked register access
 
-### v1.3
+## v1.3
 
 - Defines unaligned memory access undefined behaviour.
 - Packs all IRQs into a single one. Requires use of a memory mapped interrupt controller, but is ultimately less limiting.
@@ -588,16 +589,16 @@ TODO: Make shifts take `input1` the number of bits to shift.
 - Makes `BUS` interrupt an external interrupt for a MMU
 - Makes `BUS` prevent all effects from the current instruction
 
-### v1.2
+## v1.2
 
 - Adds preliminary I/O description
 
-### v1.1
+## v1.1
 
 - Adds _FR_, _BP_, _SP_, _IP_ register names to register description
 - Adds `FRGET`, `FRSET` instruction
 - Introduces interrupt handling description
 
-### v1.0
+## v1.0
 
 - Initial version

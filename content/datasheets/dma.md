@@ -7,11 +7,9 @@
 	revision = Version(0,1),
 }
 
-# OverkillDMA
-
 **DISCLAIMER: This document is very much work-in-progress and is only a rough working draft!**
 
-## Brain Dump
+# Brain Dump
 
 - Split the DMA into a DMA (block transfers) and a draw engine (render primitives)
 - There can be several DMA transfers active at once
@@ -21,12 +19,12 @@
 - Rectangle transfers need to have modes "tile, wrap, clamp"
 - Keep linked list DMA transfers
 
-## TODO
+# TODO
 
 - blitter finished irq
 - vector fill - How to solve "xor" with color values? - filler-line must "kill" previous lines for _Vector Fill_ to work
 
-## Draw Lists
+# Draw Lists
 
 The OverkillDMA has a linked-list design to process a sequence of commands instead of accepting single commands.
 
@@ -71,12 +69,12 @@ _Operation_ is one of the following values and define the type of operation that
 | `1110` | _reserved_      |                                                                                                        |
 | `1111` | _reserved_      |                                                                                                        |
 
-## Copy Rect
+# Copy Rect
 
 The _Copy Rect_ operation will read data from a source rectangle and will copy it to a destination rectangle.
 While copying, both an alpha operation as well as a masking operation can be performed.
 
-### Operation
+## Operation
 
 **Inputs:**
 
@@ -134,7 +132,7 @@ if x == w:
 		y = 0
 ```
 
-### Data Structures
+## Data Structures
 
 The _Copy Rect_ list node has the following structure:
 
@@ -193,7 +191,7 @@ The _Pixel Function_ has the following options:
 | `"110"` | _reserved_                  |
 | `"111"` | _reserved_                  |
 
-## Paint Primitive
+# Paint Primitive
 
 The _Paint Primitive_ operation draws a list of 2D primitives, namely points, lines, circles and triangles.
 
@@ -217,7 +215,7 @@ src = stride=10, [
 10, 0, 100, 0, 10, 0, 10, 0, C, ?,
 ]
 
-### Data Structures
+## Data Structures
 
 The _Paint Primitive_ list node has the following structure:
 
@@ -257,7 +255,7 @@ Byte 7 is a bit field:
 | `"10"` | The primitive will be filled with its color                             |
 | `"11"` | The primitive outline will be drawn with another color than its content |
 
-## Vector Fill
+# Vector Fill
 
 Similar to amiga filler: Toggle filling mode on and off when a certain color value is detected
 
@@ -269,7 +267,7 @@ on : color
 off : color
 mode : inclusive/exclusive
 
-### Data Structures
+## Data Structures
 
 The _Vector Fill_ list node has the following structure:
 

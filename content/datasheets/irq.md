@@ -7,16 +7,14 @@
     revision = Version(1,0,0),
 }
 
-# IRQ Dispatch
-
-## Overview
+# Overview
 
 - Dispatch multiple IRQ lanes into a single lane
 - Acknowledge of IRQs
 - Masking of IRQs
 - up to 32 IRQs
 
-## Function
+# Function
 
 The IRQ controller manages up to 32 different IRQ sources that work with level-driven IRQs.
 If a source IRQ lane is _low_, the IRQ is assumed to be active. A IRQ becomes inactive when the
@@ -30,7 +28,7 @@ If the IRQ was previously active, it is now disabled.
 
 Masking interrupts is supported by writing a `1` bit to `MASK0` or `MASK1`. Interrupts will only become active when the IRQ lane is _low_ and the corresponding bit in `MASK0` or `MASK1` is `0`. When the controller is reset, all interrupts are masked.
 
-## Registers
+# Registers
 
 | Offset  | Name  | Size | Access | Description            |
 | ------- | ----- | ---- | ------ | ---------------------- |
@@ -41,28 +39,28 @@ Masking interrupts is supported by writing a `1` bit to `MASK0` or `MASK1`. Inte
 | `0x004` | MASK0 | 2    | R/W    | Mask IRQs 0…15         |
 | `0x006` | MASK1 | 2    | R/W    | Mask IRQs 16…31        |
 
-### Active IRQs 0…15
+## Active IRQs 0…15
 
 When read, all IRQs between 0 and 15 that were triggered since the last acknowledge are
 displayed as `1`. All non-triggered IRQs are `0`.
 
-### Active IRQs 16…31
+## Active IRQs 16…31
 
 When read, all IRQs between 16 and 31 that were triggered since the last acknowledge are
 displayed as `1`. All non-triggered IRQs are `0`.
 
-### Acknowledge IRQs 0…15
+## Acknowledge IRQs 0…15
 
 When writing to this register, all bits that are `1` in this register will be acknowledged and reset.
 
-### Acknowledge IRQs 16…31
+## Acknowledge IRQs 16…31
 
 When writing to this register, all bits that are `1` in this register will be acknowledged and reset.
 
-### Mask IRQs 0…15
+## Mask IRQs 0…15
 
 When a bit is 1, the corresponding interrupt is masked and will not be able to get active. On controller reset, all interrupts are masked.
 
-### Mask IRQs 16…31
+## Mask IRQs 16…31
 
 When a bit is 1, the corresponding interrupt is masked and will not be able to get active. On controller reset, all interrupts are masked.

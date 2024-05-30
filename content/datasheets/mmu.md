@@ -7,9 +7,7 @@
     revision = Version(1,0,0),
 }
 
-# ExpandPro 24
-
-## Overview
+# Overview
 
 - 16 bit virtual addresses
 - 24 bit physical addresses
@@ -17,7 +15,7 @@
 - Configurable write-protection per page
 - Support for access and write faults
 
-## Function
+# Function
 
 The MMU translates virtual addresses in a physical addresses by utilizing 16 pages.
 
@@ -34,7 +32,7 @@ When a non-enabled page is accessed, the MMU raises a fault signal and sets the 
 
 When a non-writeable page is beeing written, the MMU raises a fault signal and sets the corresponding bit in the Write Fault Register.
 
-## Configuration
+# Configuration
 
 The MMU configuration is mapped into the physical address space at a system-defined location and has the following layout:
 
@@ -75,7 +73,7 @@ The Write Fault Register contains a bit for each page that flags if there was a 
 
 Each Page Fault Register and Write Fault Register are beeing cleared to 0 after a read operation.
 
-## I/Os
+# I/Os
 
 - 24 output physical address lanes
 - 16 input virtual address lanes
@@ -84,8 +82,8 @@ Each Page Fault Register and Write Fault Register are beeing cleared to 0 after 
 - RE, WE output signal (to Bus)
 - CS input to activate read-write access to the MMU
 
-## Changelog
+# Changelog
 
-### v1.0
+## v1.0
 
 - Initial version
