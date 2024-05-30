@@ -6,9 +6,19 @@ function slurp(fn)
 end
 
 function capture(command)
+  io.stderr:write(command .. "\n")
+
   local p = assert(io.popen(command, "r"))
   local str = assert(p:read("*all"))
-  p:close()
+  local success, kind, code = p:close()
+  if not success or kind ~= "exit" or code ~= 0 then 
+    io.stderr:write(("command failed: %s(%s)\n"):format(
+      tostring(kind),
+      tostring(code)
+    ))
+    os.exit(1)
+  end 
+
   return str
 end
 
@@ -127,6 +137,33 @@ local function renderToXml(source_code)
   return body
 end
 
+io.path = {}
+
+function io.path.basename(path)
+  return assert(path:match("([%w\\-]+)%.%w+$"))
+end
+
+function io.path.filename(path)
+  return assert(path:match("([%w%-%.]+)$"))
+end
+
+function io.path.dirname(path)
+  local prefix = path:match("(.*/)[%w%-%.]+$") or "."
+  while #prefix > 1 and prefix:sub(#prefix, #prefix) == "/" do
+    prefix = prefix:sub(1, #prefix - 1)
+  end
+  if prefix == "/" then
+    return prefix
+  end
+  return prefix
+end
+
+assert(io.path.basename("../figures/fr.svg") == "fr")
+assert(io.path.filename("../figures/fr.svg") == "fr.svg")
+assert(io.path.dirname("../figures/fr.svg") == "../figures")
+assert(io.path.dirname("/figures/fr.svg") == "/figures")
+assert(io.path.dirname("fr.svg") == ".")
+
 local latex_patches = {
   ["₂"] = "\\textsubscript{2}",
   ["₁₀"] = "\\textsubscript{10}",
@@ -138,7 +175,19 @@ local latex_patches = {
   ["≥"] = "$\\geq{}$",
 
   ["\\begin{longtable}%[%]{@{}"] = "\\setlength\\LTleft\\parindent\n\\setlength\\LTright{0pt}\n\\begin{longtable}[]{@{}",
-  ["@{}}"] = "@{\\extracolsep{\\fill}}l}"
+  ["@{}}"] = "@{\\extracolsep{\\fill}}l}",
+
+  ["\\includesvg{([^}]*)}"] = function(rel_path)
+    src_path = io.path.dirname(arg[1]) .. "/" .. rel_path 
+
+    out_path = io.path.basename(rel_path) .. ".pdf"
+    
+    capture(("inkscape -o temp/%s %s"):format(out_path, src_path))
+
+    return ("\\includegraphics[width=\\textwidth]{%s}\\\\"):format(
+      out_path
+    )
+  end,
 }
 
 local function renderToLaTex(source_code)
@@ -160,7 +209,7 @@ local function convertFile(source_file, mode)
 
   assert(mode == "release" or mode == "draft")
 
-  local base_name = assert(source_file:match("([%w\\-]+)%.%w+$"))
+  local base_name = io.path.basename(source_file)
 
   local doc = loadDocument(source_file)
 
@@ -180,6 +229,9 @@ local function convertFile(source_file, mode)
 \pagestyle{normalpage}
 % \thispagestyle{firstpage}
 ]] .. body .. [[
+
+\newpage
+
 \tableofcontents
 
 \end{document}
@@ -198,8 +250,8 @@ local function convertFile(source_file, mode)
     }
   )
 
-  capture("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
-  capture("pdflatex -interaction=nonstopmode -halt-on-error -output-directory=temp/ temp/" .. base_name .. ".tex")
+  capture("pdflatex -cnf-line=max_print_line=2000 -interaction=nonstopmode -halt-on-error -shell-escape -output-directory=temp/ temp/" .. base_name .. ".tex")
+  capture("pdflatex -cnf-line=max_print_line=2000 -interaction=nonstopmode -halt-on-error -shell-escape -output-directory=temp/ temp/" .. base_name .. ".tex")
 
   output_file = "temp/" .. base_name .. ".pdf"
 

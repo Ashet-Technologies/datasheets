@@ -33,6 +33,7 @@
 \RequirePackage{gensymb}
 \RequirePackage{xcolor}
 
+
 % These packages allow full-width tables and combining cells in tables.
 \RequirePackage{multirow}
 \RequirePackage{multicol}
@@ -54,7 +55,7 @@
 
 % Configure page margins
 \RequirePackage{geometry}
-\geometry{left=2cm, top=2cm, right=2cm, bottom=3cm}
+\geometry{left=2cm, top=2.5cm, right=2cm, bottom=3cm}
 
 % Command \companylogo{} can be used in document to specify a logo for the first page.
 \gdef\@companylogo{}
@@ -71,17 +72,17 @@
 \newcommand{\partno}[1]{\gdef\@partno{#1}}
 
 % First page title layout is defined here
-\renewcommand{\maketitle}{%
-    \twocolumn[%
-        {\@companylogo}\\
-        \vspace{1cm}\\
-        {\Huge\sffamily\bfseries\@title}\\
-        \noindent\rule{\textwidth}{1pt}
-        \medskip
-        ]%
-        \pagestyle{normalpage}
-        \thispagestyle{firstpage}
-}
+% \renewcommand{\maketitle}{%
+%     \twocolumn[%
+%         {\@companylogo}\\
+%         \vspace{1cm}\\
+%         {\Huge\sffamily\bfseries\@title}\\
+%         \noindent\rule{\textwidth}{1pt}
+%         \medskip
+%         ]%
+%         \pagestyle{normalpage}
+%         \thispagestyle{firstpage}
+% }
 
 % First page has footer but no header
 \RequirePackage{fancyhdr}
@@ -120,15 +121,22 @@
     {2.5ex plus .5ex}{\Large\bfseries\sffamily}%
 }
 
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+   {-3.25ex\@plus -1ex \@minus -.2ex}%
+   {1.5ex \@plus .2ex}%
+   {\normalfont\normalsize\bfseries}}
+
 % Spacing between paragraphs
-\setlength{\parskip}{2ex plus 0.5ex minus 0.2ex}
+\setlength{\parskip}{1ex plus 0.2ex minus 0.2ex}
 \setlength{\parindent}{0pt}
 
 % Spacing for tables.
 % Other alternative is to use booktabs package, but I think normal LaTeX tables
 % are more fitting in the usual data sheet style.
-\renewcommand{\arraystretch}{1.5}
+\renewcommand{\arraystretch}{1.0}
 \newcommand{\thickhline}{\noalign {\ifnum 0=`}\fi \hrule height 1pt \futurelet \reserved@a \@xhline}
 
 % No numbering for section titles
 \setcounter{secnumdepth}{0}
+
+\renewcommand{\familydefault}{\sfdefault}

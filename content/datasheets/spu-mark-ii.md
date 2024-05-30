@@ -83,6 +83,8 @@ The cpu only allows aligned memory access for word access. Unaligned word access
 
 16 bit register storing the address of the topmost value of the stack. The stack grows downwards, so a _push_ operation decrements the `SP` by two and then stores a value to the decremented address. A _pop_ or _peek_ operation reads the value from `SP`, and for _pop_, `SP` will be incremented by 2.
 
+![stack pointer bitfield diagram](../figures/ptr.svg)
+
 | Bit Fields | Description               |
 | ---------- | ------------------------- |
 | `[0]`      | reserved, must be zero    |
@@ -93,6 +95,8 @@ Initial Value: _Undefined_
 #### Base Pointer (_BP_)
 
 16 bit register that may be used for indirect addressing via `GET` and `SET` commands and may be used as a _frame pointer_ or _index register_.
+
+![base pointer bitfield diagram](../figures/ptr.svg)
 
 | Bit Fields | Description            |
 | ---------- | ---------------------- |
@@ -105,6 +109,8 @@ Initial Value: _Undefined_
 
 16 bit register pointing to the instruction to be executed next.
 
+![instruction pointer bitfield diagram](../figures/ptr.svg)
+
 | Bit Fields | Description                 |
 | ---------- | --------------------------- |
 | `[0]`      | reserved, must be zero      |
@@ -116,7 +122,7 @@ Initial Value: _Undefined_
 
 16 bit register saving CPU state and interrupt system
 
-[flag register bitfield diagram](../figures/fr.svg)
+![flag register bitfield diagram](../figures/fr.svg)
 
 | Bit Range | Name       | Description                                      |
 | --------- | ---------- | ------------------------------------------------ |
@@ -135,7 +141,7 @@ Initial Value: `0x0000`
 
 16 bit register storing internal interrupt information.
 
-[interrupt register bitfield diagram](../figures/ir.svg)
+![interrupt register bitfield diagram](../figures/ir.svg)
 
 | Bit Range | Name         | Description                      |
 | --------- | ------------ | -------------------------------- |
@@ -155,9 +161,9 @@ Initial Value: `0x0001` (Reset interrupt triggered)
 
 ### Instruction Encoding
 
-Instructions use 16 bit opcodes organized in different bit fields defining the behaviour of the instruction.
+Instructions use 16 bit opcodes organized in different bit fields defining the behaviour of the instruction:
 
-[instruction bitfield diagram](../figures/instruction.svg)
+![instruction bitfield diagram](../figures/instruction.svg)
 
 | Bit Range | Description                           |
 | --------- | ------------------------------------- |
